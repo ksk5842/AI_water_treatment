@@ -1,0 +1,37 @@
+{
+    "name": "aquaflow-ai",
+    "version": "1.0.0",
+    "description": "AI-powered water treatment monitoring and dosage prediction system",
+    "private": true,
+    "scripts": {
+        "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+        "dev:frontend": "cd frontend && npm run dev",
+        "dev:backend": "cd backend && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+        "bridge": "cd backend && python serial_bridge.py",
+        "bridge:mock": "cd backend && python serial_bridge.py --mock",
+        "bridge:com3": "cd backend && python serial_bridge.py --port COM3",
+        "bridge:list": "cd backend && python serial_bridge.py --list",
+        "full": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run bridge:mock\"",
+        "build": "cd frontend && npm run build",
+        "preview": "cd frontend && npm run preview",
+        "install:all": "npm install && cd frontend && npm install",
+        "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+        "start:frontend": "cd frontend && npm run preview",
+        "start:backend": "cd backend && python -m uvicorn main:app --host 0.0.0.0 --port 8000",
+        "test": "cd frontend && npm test"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    },
+    "keywords": [
+        "water-treatment",
+        "ai",
+        "machine-learning",
+        "iot",
+        "arduino",
+        "react",
+        "fastapi"
+    ],
+    "author": "AquaFlow AI",
+    "license": "MIT"
+}

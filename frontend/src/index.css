@@ -1,0 +1,256 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/600.css";
+@import "@fontsource/outfit/700.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AquaFlow Water Treatment Dashboard Design System */
+
+@layer base {
+  :root {
+    /* Core palette - Aquatic Industrial Theme */
+    --background: 220 30% 8%;
+    --foreground: 210 40% 96%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    /* Emerald primary - water treatment accent */
+    --primary: 160 84% 52%;
+    --primary-foreground: 220 30% 8%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 160 84% 52%;
+    --accent-foreground: 220 30% 8%;
+
+    /* Status colors */
+    --optimal: 160 84% 52%;
+    --caution: 45 93% 58%;
+    --danger: 0 84% 60%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 22%;
+    --input: 217 33% 20%;
+    --ring: 160 84% 52%;
+
+    --radius: 0.75rem;
+
+    /* Glass effects */
+    --glass-bg: 217 33% 17% / 0.6;
+    --glass-border: 217 33% 30% / 0.3;
+    --glass-blur: 12px;
+
+    /* Gauge colors */
+    --gauge-track: 217 33% 20%;
+    --gauge-optimal: 160 84% 52%;
+    --gauge-caution: 45 93% 58%;
+    --gauge-danger: 0 84% 60%;
+
+    /* Glow effects */
+    --glow-primary: 160 84% 52% / 0.4;
+    --glow-caution: 45 93% 58% / 0.4;
+    --glow-danger: 0 84% 60% / 0.4;
+
+    /* Sidebar */
+    --sidebar-background: 220 30% 6%;
+    --sidebar-foreground: 210 40% 70%;
+    --sidebar-primary: 160 84% 52%;
+    --sidebar-primary-foreground: 220 30% 8%;
+    --sidebar-accent: 217 33% 15%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 33% 18%;
+    --sidebar-ring: 160 84% 52%;
+  }
+
+  .dark {
+    /* Already dark theme by default */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image: 
+      radial-gradient(ellipse at 20% 0%, hsl(var(--primary) / 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, hsl(217 33% 12%) 0%, hsl(var(--background)) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Glass card effect */
+  .glass-card {
+    @apply rounded-xl border;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
+  /* Gauge glow effects */
+  .gauge-glow-optimal {
+    filter: drop-shadow(0 0 12px hsl(var(--glow-primary)));
+  }
+
+  .gauge-glow-caution {
+    filter: drop-shadow(0 0 12px hsl(var(--glow-caution)));
+  }
+
+  .gauge-glow-danger {
+    filter: drop-shadow(0 0 12px hsl(var(--glow-danger)));
+  }
+
+  /* Status pulse */
+  .status-pulse {
+    @apply relative;
+  }
+
+  .status-pulse::before {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .status-pulse-optimal::before {
+    background: hsl(var(--optimal) / 0.5);
+  }
+
+  .status-pulse-caution::before {
+    background: hsl(var(--caution) / 0.5);
+  }
+
+  .status-pulse-danger::before {
+    background: hsl(var(--danger) / 0.5);
+  }
+
+  /* Metric card */
+  .metric-card {
+    @apply glass-card p-4 flex flex-col items-center justify-center gap-1;
+  }
+
+  /* Connection status dot */
+  .connection-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+
+  .connection-dot-connected {
+    @apply bg-optimal;
+    box-shadow: 0 0 8px hsl(var(--optimal));
+  }
+
+  .connection-dot-disconnected {
+    @apply bg-danger;
+    box-shadow: 0 0 8px hsl(var(--danger));
+  }
+}
+
+@layer utilities {
+  .text-optimal {
+    color: hsl(var(--optimal));
+  }
+
+  .text-caution {
+    color: hsl(var(--caution));
+  }
+
+  .text-danger {
+    color: hsl(var(--danger));
+  }
+
+  .bg-optimal {
+    background-color: hsl(var(--optimal));
+  }
+
+  .bg-caution {
+    background-color: hsl(var(--caution));
+  }
+
+  .bg-danger {
+    background-color: hsl(var(--danger));
+  }
+
+  .border-optimal {
+    border-color: hsl(var(--optimal));
+  }
+
+  .border-caution {
+    border-color: hsl(var(--caution));
+  }
+
+  .border-danger {
+    border-color: hsl(var(--danger));
+  }
+}
+
+/* Keyframe animations */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes gauge-fill {
+  from {
+    stroke-dashoffset: 283;
+  }
+}
+
+@keyframes data-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
