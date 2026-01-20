@@ -6,9 +6,13 @@ import { ControlsPanel } from '@/components/dashboard/ControlsPanel';
 import { PredictionPanel } from '@/components/dashboard/PredictionPanel';
 import { SensorChart } from '@/components/dashboard/SensorChart';
 import { useSensorStore, getStatus, THRESHOLDS } from '@/stores/sensorStore';
+import { useWebSocketConnection } from '@/hooks/useWebSocketConnection';
 import { Activity, Droplets, Thermometer } from 'lucide-react';
 
 const Index = () => {
+  // Auto-connect to WebSocket for real-time sensor data
+  useWebSocketConnection();
+
   const { currentReading, metrics, connectionStatus } = useSensorStore();
 
   // Calculate gauge percentages

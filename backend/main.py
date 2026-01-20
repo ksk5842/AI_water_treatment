@@ -19,7 +19,7 @@ from predictor import get_predictor, DosePredictor
 
 class SensorReading(BaseModel):
     """Input sensor reading from Arduino or manual input."""
-    turbidity: float = Field(..., ge=0, description="Turbidity in NTU")
+    turbidity: float = Field(..., description="Turbidity in NTU")  # Allow negative for raw sensor calibration offsets
     ph: float = Field(..., ge=0, le=14, description="pH level")
     tds: float = Field(..., ge=0, description="Total Dissolved Solids in mg/L")
     bod: Optional[float] = Field(default=25.0, ge=0, description="BOD in mg/L")
